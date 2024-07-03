@@ -1,6 +1,6 @@
-# calm.db
+.# calm.db
 
-calm.db is a simple JSON-based database for Node.js applications. It provides methods to easily store, retrieve, and manipulate data in a JSON file.
+calm.db is a zero-dependency, lightweight JSON-based database for Node.js applications. It provides methods to easily store, retrieve, and manipulate data, now including CSV import and export capabilities.
 
 ## Installation
 
@@ -15,24 +15,24 @@ npm install calm.db
 ### Initialize calm.db
 
 ```javascript
-const Database = require('calm.db');
+const Database = require("calm.db");
 
 // Initialize calm.db with a file path
-const db = new Database('data/db.json');
+const db = new Database("data/db.json");
 ```
 
 ### Setting Data
 
 ```javascript
 // Set key-value pair
-await db.set('key1', 'value1');
+await db.set("key1", "value1");
 ```
 
 ### Getting Data
 
 ```javascript
 // Get value by key
-const value = await db.get('key1');
+const value = await db.get("key1");
 console.log(value); // Output: 'value1'
 ```
 
@@ -40,7 +40,7 @@ console.log(value); // Output: 'value1'
 
 ```javascript
 // Check if key exists
-const exists = await db.has('key1');
+const exists = await db.has("key1");
 console.log(exists); // Output: true
 ```
 
@@ -48,7 +48,7 @@ console.log(exists); // Output: true
 
 ```javascript
 // Delete data by key
-const deleted = await db.delete('key1');
+const deleted = await db.delete("key1");
 console.log(deleted); // Output: true (if successful)
 ```
 
@@ -57,15 +57,15 @@ console.log(deleted); // Output: true (if successful)
 ```javascript
 // Get all keys
 const keys = await db.keys();
-console.log(keys); // Output: ['key1']
+console.log(keys); // Output: ['key1', 'key2', 'key3']
 
 // Get all values
 const values = await db.values();
-console.log(values); // Output: ['value1']
+console.log(values); // Output: ['value1', 'value2', 'value3']
 
 // Get the number of entries
 const count = await db.size();
-console.log(count); // Output: 1
+console.log(count); // Output: 3
 ```
 
 ### JSON Operations
@@ -73,19 +73,35 @@ console.log(count); // Output: 1
 ```javascript
 // Convert database to JSON object
 const json = await db.toJSON();
-console.log(json); // Output: { key1: 'value1' }
+console.log(json); // Output: { key1: 'value1', key2: 'value2', key3: 'value3' }
 
 // Load JSON data into database
-const newData = { key2: 'value2', key3: 'value3' };
+const newData = { key4: "value4", key5: "value5" };
 await db.fromJSON(newData);
+```
+
+### Exporting and Importing CSV
+
+```javascript
+// Export database to CSV string
+const csvString = await db.toCSV();
+console.log(csvString);
+
+// Import CSV string into database
+const newCSVData = `
+key,value
+key2,value2
+key3,value3
+`;
+await db.fromCSV(newCSVData);
 ```
 
 ### Searching with Filters
 
 ```javascript
 // Find entries based on a filter function
-const filtered = await db.find((key, value) => key.startsWith('key'));
-console.log(filtered); // Output: [['key1', 'value1']]
+const filtered = await db.find((key, value) => key.startsWith("key"));
+console.log(filtered); // Output: [['key1', 'value1'], ['key2', 'value2'], ['key3', 'value3']]
 ```
 
 ## Contributing
