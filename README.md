@@ -1,4 +1,4 @@
-.# calm.db
+# calm.db
 
 calm.db is a zero-dependency, lightweight JSON-based database for Node.js applications. It provides methods to easily store, retrieve, and manipulate data, now including CSV import and export capabilities.
 
