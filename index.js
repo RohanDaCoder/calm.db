@@ -3,10 +3,11 @@ const path = require("path");
 
 class Database {
   constructor(filePath) {
-    if (!filePath)
+    if (!filePath) {
       throw new TypeError(
         "[Database] Constructor Error: Missing file path argument.",
       );
+    }
     this.filePath = path.resolve(__dirname, filePath);
     this.storage = {};
     this.initialized = this._init();
